@@ -9,8 +9,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use App\Models\Blog;
+use App\Models\Setting;
+use App\Models\Contact;
+use App\Models\Service;
+
 class ProfileController extends Controller
 {
+    public function index(){
+
+        $data['blogs'] = Blog::all();
+        $data['setting'] = Setting::first();
+        $data['contact'] = Contact::get();
+        $data['service'] = Service::get();
+        return view('dashboard',$data);
+    }
+
     /**
      * Display the user's profile form.
      */

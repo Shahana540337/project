@@ -11,7 +11,8 @@
             <div class="col-12">
                 <div class="row justify-content-center m-3 ">
                     <div class="col-5 card p-4">
-                        <form action="{{url('/blog-update',$blog->id)}}" method="post" enctype="multipart/from-data">
+
+                        <form action="{{url('/blog-update',$blog->id)}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('put')
 
@@ -21,12 +22,19 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Image</label>
-                                <img src="{{asset('images/blogs/'.$blog->image)}}" alt="" style="height:100px;">
+                                <img src="{{asset('images/blogs/'.$blog->image)}}" alt="" style="height:50px;">
                                 <input type="file" name="image" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Category</label>
-                                <input type="text" name="category" value="{{$blog->category}}" class="form-control">
+                                <select name="category" class="form-select" id="" required>
+                                    <option value="" hidden>Choose</option>
+
+                                    @foreach ($blogCategorys as $data)
+                                        <option value="{{$data->id}}">{{$data->title}}</option>
+                                    @endforeach
+
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
@@ -36,6 +44,7 @@
                                 <button type="submit" class="btn btn-success ">Update</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>

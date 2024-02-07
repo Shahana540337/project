@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Project Portfolio</title>
+  <title>{{$setting->title}}</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ asset('frontend/assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset(('images/settings/'.$setting->logo)) }}" rel="icon">
   <link href="{{ asset('frontend/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Vendor CSS Files -->
@@ -30,7 +30,11 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="{{url('/')}}">DevFolio</a></h1>
+      <h1 class="logo">
+        <a href="{{url('/')}}">
+          <img src="{{asset('images/settings/'.$setting->logo)}}" alt="" style="width:100%;">
+        </a>
+      </h1>
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto" href="#hero">Home</a></li>
@@ -72,40 +76,39 @@
                         Send Message Us
                       </h5>
                     </div>
+
                     <div>
-                      <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                      <form action="{{url('/contact-store')}}" method="post"  enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
                           <div class="col-md-12 mb-3">
                             <div class="form-group">
-                              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" >
                             </div>
                           </div>
                           <div class="col-md-12 mb-3">
                             <div class="form-group">
-                              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" >
                             </div>
                           </div>
                           <div class="col-md-12 mb-3">
                             <div class="form-group">
-                              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" >
                             </div>
                           </div>
                           <div class="col-md-12">
                             <div class="form-group">
-                              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                              <textarea class="form-control" name="message" rows="3" placeholder="Message" ></textarea>
                             </div>
                           </div>
-                          <div class="col-md-12 text-center my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                          </div>
-                          <div class="col-md-12 text-center">
-                            <button type="submit" class="button button-a button-big button-rouded">Send Message</button>
+                          <div class="col-md-12 text-center mt-3">
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                            <!-- <button type="submit" class="button button-a button-big button-rouded">Send Message</button> -->
                           </div>
                         </div>
                       </form>
                     </div>
+                    
                   </div>
                   <div class="col-md-6">
                     <div class="title-box-2 pt-4 pt-md-0">
@@ -121,17 +124,28 @@
                         mollitia inventore?
                       </p>
                       <ul class="list-ico">
-                        <li><span class="bi bi-geo-alt"></span> 329 WASHINGTON ST BOSTON, MA 02108</li>
-                        <li><span class="bi bi-phone"></span> (617) 557-0089</li>
-                        <li><span class="bi bi-envelope"></span> contact@example.com</li>
+                        <li><span class="bi bi-geo-alt"></span> {{$setting->location}}</li>
+                        <li><span class="bi bi-phone"></span> {{$setting->mobile}}</li>
+                        <li><span class="bi bi-envelope"></span> {{$setting->email}}</li>
                       </ul>
                     </div>
                     <div class="socials">
                       <ul>
-                        <li><a href=""><span class="ico-circle"><i class="bi bi-facebook"></i></span></a></li>
-                        <li><a href=""><span class="ico-circle"><i class="bi bi-instagram"></i></span></a></li>
-                        <li><a href=""><span class="ico-circle"><i class="bi bi-twitter"></i></span></a></li>
-                        <li><a href=""><span class="ico-circle"><i class="bi bi-linkedin"></i></span></a></li>
+                        @if ($setting->facebook)
+                          <li><a href="{{$setting->facebook}}" target="_blank"><span class="ico-circle"><i class="bi bi-facebook"></i></span></a></li>
+                        @endif
+
+                        @if ($setting->facebook)
+                          <li><a href="{{$setting->instagram}}" target="_blank"><span class="ico-circle"><i class="bi bi-instagram"></i></span></a></li>
+                        @endif
+                        
+                        @if ($setting->facebook)
+                          <li><a href="{{$setting->twitter}}" target="_blank"><span class="ico-circle"><i class="bi bi-twitter"></i></span></a></li>
+                        @endif
+
+                        @if ($setting->facebook)
+                          <li><a href="{{$setting->linkedin}}" target="_blank"><span class="ico-circle"><i class="bi bi-linkedin"></i></span></a></li>
+                        @endif
                       </ul>
                     </div>
                   </div>

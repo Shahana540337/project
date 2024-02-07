@@ -23,7 +23,14 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Category</label>
-                                <input type="text" name="category" class="form-control">
+                                <select name="category" class="form-select" id="" required>
+                                    <option value="" hidden>Choose</option>
+
+                                    @foreach ($blogCategorys as $data)
+                                        <option value="{{$data->id}}">{{$data->title}}</option>
+                                    @endforeach
+
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Description</label>

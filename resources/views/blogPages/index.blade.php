@@ -23,16 +23,15 @@
                     <tbody>
                         @foreach ($blogs as $blog)
                         <tr>
-                            <th scope="row">{{ $blog->id }}</th>
+                            <th scope="row">{{$loop->index+1}}</th>
                             <td>{{ Str::limit($blog->title,10) }}</td>
                             <td>
                                 <img src="{{asset('images/blogs/'.$blog->image)}}" alt="" width="50px" height="auto">
                             </td>
-                            <td>{{ Str::limit($blog->category,10) }}</td>
+                            <td>{{$blog->blogCategory->title}}</td>
                             <td>{{ Str::limit($blog->description,30) }}</td>
                             <td>
                                 <a href="{{url('/blog-edit',$blog->id)}}" class="btn btn-success">Edit</a>
-                                <a href="{{url('/blog-show',$blog->id)}}" class="btn btn-primary">Show</a>
                                 <a href="{{url('/blog-delete',$blog->id)}}" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
@@ -40,8 +39,10 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        <!-- </div>blogCategory->title -->
     </div>
 </section>
 
 @endsection
+
+<!-- blogCategory->title -->
